@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#menu.jsp" PATH="/menu.jsp"
+  SHAPE="48,16,50,57" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#menu.jsp:0" NAME="item" PATH="/menu.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="principal::#principal.jsp" NAME="output"
+    PATH="/principal.jsp" TARGET="rules:#principal.jsp"
+    TITLE="principal" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="loginInfo::#loginInfo.jsp" NAME="output1"
+    PATH="/loginInfo.jsp" TARGET="rules:#loginInfo.jsp"
+    TITLE="loginInfo" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#principal.jsp" PATH="/principal.jsp"
+  SHAPE="272,24,50,25" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#loginInfo.jsp" PATH="/loginInfo.jsp"
+  SHAPE="168,104,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#loginInfo.jsp:0" NAME="item"
+   PATH="/loginInfo.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="userInfo::#userInfo.jsp" NAME="output"
+    PATH="/userInfo.jsp" TARGET="rules:#userInfo.jsp" TITLE="userInfo" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#userInfo.jsp" PATH="/userInfo.jsp"
+  SHAPE="312,168,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#userInfo.jsp:0" NAME="item"
+   PATH="/userInfo.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="billingInfo::#billingInfo.jsp" NAME="output"
+    PATH="/billingInfo.jsp" TARGET="rules:#billingInfo.jsp"
+    TITLE="billingInfo" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#billingInfo.jsp" PATH="/billingInfo.jsp"
+  SHAPE="464,240,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#billingInfo.jsp:0" NAME="item"
+   PATH="/billingInfo.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="infoConfirm::#infoConfirm.jsp" NAME="output"
+    PATH="/infoConfirm.jsp" TARGET="rules:#infoConfirm.jsp"
+    TITLE="infoConfirm" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#infoConfirm.jsp" PATH="/infoConfirm.jsp"
+  SHAPE="600,120,50,41" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#infoConfirm.jsp:0" NAME="item"
+   PATH="/infoConfirm.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="menu::#menu.jsp" NAME="output"
+    PATH="/menu.jsp" TARGET="rules:#menu.jsp" TITLE="menu" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

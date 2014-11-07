@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+ <navigation-rule>
+  <from-view-id>/menu.jsp</from-view-id>
+  <navigation-case>
+    <from-outcome>principal</from-outcome>
+    <to-view-id>/principal.jsp</to-view-id>
+  </navigation-case>
+  <navigation-case>
+    <from-outcome>loginInfo</from-outcome>
+    <to-view-id>/loginInfo.jsp</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+   <from-view-id>/loginInfo.jsp</from-view-id>
+   <navigation-case>
+     <from-outcome>userInfo</from-outcome>
+     <to-view-id>/userInfo.jsp</to-view-id>
+   </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/userInfo.jsp</from-view-id>
+  <navigation-case>
+   <from-outcome>billingInfo</from-outcome>
+   <to-view-id>/billingInfo.jsp</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/billingInfo.jsp</from-view-id>
+  <navigation-case>
+   <from-outcome>infoConfirm</from-outcome>
+   <to-view-id>/infoConfirm.jsp</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+ <navigation-rule>
+  <from-view-id>/infoConfirm.jsp</from-view-id>
+  <navigation-case>
+   <from-outcome>menu</from-outcome>
+   <to-view-id>/menu.jsp</to-view-id>
+  </navigation-case>
+ </navigation-rule>
+</faces-config>
