@@ -50,7 +50,7 @@ public class FeaturedItemBean implements FeturedItemLocal {
 	}
 
 	@PostConstruct
-	@Schedule( year="*", dayOfWeek="*" , hour="*" , minute="*/3" , persistent=false )
+	@Schedule( year="*", dayOfWeek="*" , hour="*" , minute="*/5" , persistent=false )
 	@Timeout
 	@AccessTimeout(unit=TimeUnit.MINUTES, value=1)
 	private void loadFeaturedItem(Timer timer){
