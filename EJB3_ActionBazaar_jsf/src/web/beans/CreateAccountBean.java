@@ -2,6 +2,7 @@ package web.beans;
 
 import java.util.Hashtable;
 
+import javax.ejb.EJB;
 import javax.faces.application.ViewExpiredException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -35,20 +36,27 @@ public class CreateAccountBean {
 	private BillingInfo_DTO billinginfo;
 	private UserAccountCreatorLocal accountService;
 	
+	/*
+	 * Obtencion del recurso EJB usando Dependency Injection
+	 */
+	@EJB 
+	private UserAccountCreatorLocal injection_accountService;
+	
 	public CreateAccountBean() {
 	}
 	
 	@PostConstruct
 	private void initialize(){
 		
-		accountService = initializeService();
+		//accountService = initializeService();
 		
 	}
 	
 	public void addLoginInfo(){
 		
 		logininfo = new LoginInfo_DTO(username, password);
-		accountService.addLoginInfo( logininfo );
+		//accountService.addLoginInfo( logininfo );
+		injection_accountService.addLoginInfo( logininfo );
 		
 	}
 	
@@ -56,7 +64,8 @@ public class CreateAccountBean {
 		
 		biographicalinfo = new BiographicalInfo_DTO(firstName, lastName);
 		try {
-			accountService.addBiographicalInfo( biographicalinfo );
+			//accountService.addBiographicalInfo( biographicalinfo );
+			injection_accountService.addBiographicalInfo( biographicalinfo );
 		} catch (WorkFlowException e) {
 			e.printStackTrace();
 		}
@@ -67,7 +76,8 @@ public class CreateAccountBean {
 		
 		billinginfo = new BillingInfo_DTO(accountNumber, creditCardType, expiryDate);
 		try {
-			accountService.addBillingInfo(billinginfo);
+			//accountService.addBillingInfo(billinginfo);
+			injection_accountService.addBillingInfo(billinginfo);
 		} catch (WorkFlowException e) {
 			e.printStackTrace();
 		}
@@ -78,14 +88,9 @@ public class CreateAccountBean {
 		
 		try{
 			
-			accountService.createAccount();
-			
-//			final UserAccountCreatorLocal createAccountService = initializeService();
-//			
-//			createAccountService.addLoginInfo( logininfo );
-//			createAccountService.addBiographicalInfo( biographicalinfo );
-//			createAccountService.addBillingInfo( billinginfo );
-//			createAccountService.createAccount();
+			//accountService.createAccount();
+			injection_accountService.createAccount();
+
 			clean();
 			
 			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -98,35 +103,41 @@ public class CreateAccountBean {
 	
 	public void cancel(){
 		
-		accountService.cancelAccountCreation();
+		//accountService.cancelAccountCreation();
+		injection_accountService.cancelAccountCreation();
 		clean();
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		
 	}
-	
+	/*
+	 * Inicializacion del recurso EJB usando JNDI lookup() 
+	 */
 	@SuppressWarnings("unchecked")
 	private static UserAccountCreatorLocal initializeService() {
 	
 	    try {
-	    	
 	    	@SuppressWarnings("rawtypes")
+	    	/*
+	    	 * Inicializando el contexto para la busqueda en la JNDI 
+	    	 */
 			final Hashtable jndiProperties = new Hashtable();
 	    	jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
 	    	final Context context = new InitialContext(jndiProperties);
+	    	/*
+	    	 * Variable para la busqueda en el contexto JNDI
+	    	 */
 	    	final String appName="EJB3_ActionBazaar_ear";
 	    	final String moduleName="EJB3_ActionBazaar_ejb";
 	    	final String distinctName = "";
 	    	final String beanName = UserAccountCreatorBean.class.getSimpleName();
 	    	final String viewClassName = UserAccountCreatorLocal.class.getName();
-	    	
+	    	/*
+	    	 * La busqueda JNDI en el contexto, para obtener el EJB  UserAccountCreatorBean.
+	    	 */
 	    	return (UserAccountCreatorLocal) context.lookup("ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName + "?stateful");
-	    	
-	    	
 		} catch (NamingException e) {
-
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 	
